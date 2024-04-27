@@ -1,0 +1,10 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.boton-amarillo {
+    @include m.boton(v.$amarillo, block);
+}
+
+.boton-verde {
+    @include m.boton(v.$verde, inline-block);
+}
