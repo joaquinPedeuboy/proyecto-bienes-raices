@@ -12,15 +12,15 @@
         <div class="contenedor contenido-header">
             <div class="barra">
                 <a href="/BienesRaices/index.php">
-                    <img loading="lazy" src="build/img/logo.svg" alt="logotipo de Bienes Raices">
+                    <img loading="lazy" src="/BienesRaices/build/img/logo.svg" alt="logotipo de Bienes Raices">
                 </a>
 
                 <div class="mobile-menu">
-                    <img loading="lazy" src="build/img/barras.svg" alt="icono menu responsive">
+                    <img loading="lazy" src="/BienesRaices/build/img/barras.svg" alt="icono menu responsive">
                 </div>
 
                 <div class="derecha">
-                    <img class="dark-mode-boton" src="build/img/dark-mode.svg" alt="icono dark-mode">
+                    <img class="dark-mode-boton" src="/BienesRaices/build/img/dark-mode.svg" alt="icono dark-mode">
 
                     <nav class="navegacion">
                         <a href="nosotros.php">Nosotros</a>
