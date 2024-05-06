@@ -1,5 +1,15 @@
 <?php
 
+    //Importar base de datos
+    require '../includes/config/database.php';
+    $db = conectarDB();
+
+    //Escribir query
+    $query = "SELECT * FROM propiedades";
+
+    //Consulta la db
+    $resultadoConsulta = mysqli_query($db, $query);
+
     //Muestra mensaje condicional
     $resultado = $_GET['Resultado'] ?? null;
 
@@ -30,20 +40,26 @@
                 </tr>
             </thead>
             <tbody>
+                <?php while( $propiedad = mysqli_fetch_assoc($resultadoConsulta)) : ?>
                 <tr>
-                    <td>1</td>
-                    <td>Casa en la playa</td>
-                    <td><img src="../imagenes/2e84d6ec37514238e2d489f2a978b978.jpg" class="imagen-tabla"></td>
-                    <td>$123456</td>
+                    <td><?php echo $propiedad['id']; ?> </td>
+                    <td><?php echo $propiedad['titulo']; ?></td>
+                    <td><img src="../imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"></td>
+                    <td>$<?php echo $propiedad['precio']; ?></td>
                     <td>
                         <a href="#" class="boton-rojo-block">Eliminar</a>
                         <a href="#" class="boton-amarillo-block">Actualizar</a>
                     </td>
                 </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </main>
 
 <?php
+
+    //Cerrar la conexion
+    mysqli_close($db);
+    
     incluirTemplate('footer');
 ?>
