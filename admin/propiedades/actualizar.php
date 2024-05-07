@@ -1,8 +1,22 @@
 <?php
 
+    // Validar id valido
+    $id = $_GET['id'];
+    $id = filter_var($id, FILTER_VALIDATE_INT);
+    if(!$id) {
+        header('Location: /BienesRaices/admin');
+    }
+
     //Base de datos
     require '../../includes/config/database.php';
     $db = conectarDB();
+
+    // Obtener los datos de la propiedad
+    $consulta = "SELECT * FROM propiedades WHERE id = ${id}";
+    $resultado = mysqli_query($db, $consulta);
+    $propiedad = mysqli_fetch_assoc($resultado);
+
+
 
     // Consultar para obtener los vendedores
     $consulta = "SELECT * FROM vendedores";
@@ -10,13 +24,15 @@
 
     //Arreglo con mensajes de errores
     $errores = [];
-    $titulo = '';
-    $precio = '';
-    $descripcion = '';
-    $habitaciones = '';
-    $wc = '';
-    $estacionamiento = '';
-    $vendedores_id = '';
+
+    $titulo = $propiedad['titulo'];
+    $precio = $propiedad['precio'];
+    $descripcion = $propiedad['descripcion'];
+    $habitaciones = $propiedad['habitaciones'];
+    $wc = $propiedad['wc'];
+    $estacionamiento = $propiedad['estacionamiento'];
+    $vendedores_id = $propiedad['vendedores_id'];
+    $imagenPropiedad = $propiedad['imagen'];
 
     //Ejecutar el codigo despues de enviar el formulario
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -151,6 +167,8 @@
 
                 <label for="imagen">Imagen:</label>
                 <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen">
+                
+                <img src="/BienesRaices/imagenes/<?php echo $imagenPropiedad ?>" class="imagen-small">
 
                 <label for="descripcion">Descripcion:</label>
                 <textarea id="descripcion" name="descripcion"><?php echo $descripcion; ?></textarea>
@@ -184,7 +202,7 @@
                 </select>
             </fieldset>
 
-            <input type="submit" value="Crear Propiedad" class="boton boton-verde">
+            <input type="submit" value="Actualizar Propiedad" class="boton boton-verde">
         </form>
     </main>
 
