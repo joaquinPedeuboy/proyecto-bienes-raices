@@ -12,12 +12,35 @@
     border: 1px solid darken(v.$gris, 10);
     margin-bottom: 2rem;
 
+    .img-heigth {
+        .img-altura {
+            height: 30rem;
+        }
+    }
+
     .contenido-anuncio {
         padding: 2rem;
     }
 
     h3, p {
         margin: 0;
+        
+    }
+
+    h3 {
+        @include m.tablet {            
+            width: 18rem;
+            height: 15rem;
+            line-height: 1.3;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @include m.desktop {
+            width: auto;
+            height: 10rem;            
+        }
     }
 }
 
