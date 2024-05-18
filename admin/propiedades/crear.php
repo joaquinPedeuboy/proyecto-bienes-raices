@@ -1,13 +1,12 @@
 <?php
-    require '../../includes/funciones.php';
-    $auth = estadoAutenticado();
+    require '../../includes/app.php';
 
-    if(!$auth) {
-        header('Location : /');
-    }
+    use App\Propiedad;
 
-    //Base de datos
-    require '../../includes/config/database.php';
+
+    estadoAutenticado();
+
+
     $db = conectarDB();
 
     // Consultar para obtener los vendedores
@@ -26,13 +25,9 @@
 
     //Ejecutar el codigo despues de enviar el formulario
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // echo "<pre>";
-        // var_dump($_POST);
-        // echo "</pre>";
 
-        // echo "<pre>";
-        // var_dump($_FILES);
-        // echo "</pre>";
+        $propiedad = new Propiedad($_POST);
+        $propiedad->guardar();
 
 
         $titulo = mysqli_real_escape_string($db, $_POST['titulo'] );
@@ -113,10 +108,7 @@
             move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen );
 
 
-            //Insertar en la base de datos
-            $query = " INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id)  
-            VALUES ( '$titulo', '$precio','$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado' ,'$vendedores_id')";
-
+            
             $resultado = mysqli_query($db, $query);
 
             if($resultado) {
@@ -178,7 +170,7 @@
             <fieldset>
                 <legend>Vendedor</legend>
 
-                <select name="vendedor">
+                <select name="vendedores_id">
                     <option value="" disabled selected>-- Seleccione --</option>
 
                     <?php while($vendedor = mysqli_fetch_assoc($resultado)) : ?>

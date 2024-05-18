@@ -1,0 +1,17 @@
+{
+    "name": "joaqu/bienes-raices",
+    "description": "Creando un proyecon con POO",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "./classes"
+        }
+    },
+    "authors": [
+        {
+            "name": "Joaquin Pedeuboy",
+            "email": "joaquin.pedeuboy@hotmail.com"
+        }
+    ],
+    "require": {}
+}
