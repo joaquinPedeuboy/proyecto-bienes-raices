@@ -2,7 +2,7 @@
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//error_reporting(E_ALL); // reporta los errores
 
     require '../../includes/app.php';
 
@@ -145,7 +145,7 @@ error_reporting(E_ALL);
     incluirTemplate('footer');
 ?>
 
-/**
+<!-- 
                         VERSION NUEVA DE INTERVENTION IMAGE
                         
     use Intervention\Image\ImageManager as Image;
@@ -201,6 +201,5 @@ error_reporting(E_ALL);
     }
     
     
-    }
+    } -->
 
-*/
