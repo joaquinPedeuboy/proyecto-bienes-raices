@@ -26,3 +26,10 @@ function debuguear($variable) {
 
     exit;
 }
+
+// Escapa / sanitizar el HTML
+
+function s($html) : string {
+    $s= htmlspecialchars($html);
+    return $s;
+}
