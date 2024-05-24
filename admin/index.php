@@ -6,6 +6,9 @@
 
     use App\Propiedad;
 
+    //Incluye un template
+    incluirTemplate('header');
+
     // Implementar un metodo para obtener todas las propiedades
     $propiedades = Propiedad::all();
 
@@ -24,9 +27,6 @@
         }
     }
 
-    //Incluye un template
-    
-    incluirTemplate('header');
 ?>
 
 

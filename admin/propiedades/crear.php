@@ -58,13 +58,7 @@ ini_set('display_startup_errors', 1);
             $image->save(CARPETA_IMAGENES . $nombreImagen);
 
             // Guarda en la base de datos
-            $resultado = $propiedad->guardar();
-
-            // Mensaje de exito
-            if($resultado) {
-                // Redireccion al usuario
-                header('Location: /BienesRaices/admin?Resultado=1');
-            }
+            $propiedad->guardar();
         }
 
     }

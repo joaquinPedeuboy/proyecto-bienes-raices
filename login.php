@@ -42,7 +42,7 @@
                     $_SESSION['usuario'] = $usuario['email'];
                     $_SESSION['login'] = true;
 
-                    header('Location: /BienesRaices/index.php');
+                    header('Location: /BienesRaices/admin');
                 } else {
                     $errores[] = 'El password es incorrecto';
                 }

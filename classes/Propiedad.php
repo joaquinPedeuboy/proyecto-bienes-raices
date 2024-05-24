@@ -30,7 +30,7 @@ class Propiedad {
 
     public function __construct($args = [])
     {
-        $this->id = $args['id'] ?? '';
+        $this->id = $args['id'] ?? NULL;
         $this->titulo = $args['titulo'] ?? '';
         $this->precio = $args['precio'] ?? '';
         $this->imagen = $args['imagen'] ?? '';
@@ -43,7 +43,7 @@ class Propiedad {
     }
 
     public function guardar() {
-        if(isset($this->id)) {
+        if(!is_null($this->id)) {
             // Actualizar
             $this->actualizar();
 
@@ -67,7 +67,11 @@ class Propiedad {
 
         $resultado = self::$db->query($query);
 
-        return $resultado;
+        // Mensaje de exito
+        if($resultado) {
+            // Redireccion al usuario
+            header('Location: /BienesRaices/admin?Resultado=1');
+        }
     }
 
     public function actualizar() {
@@ -129,7 +133,7 @@ class Propiedad {
     // Subida de Archivos
     public function setImagen($imagen) {
         // Elimina la imagen previa
-        if(isset($this->id)) {
+        if(!is_null($this->id)) {
             $this->borrarImagen();
         }
 
