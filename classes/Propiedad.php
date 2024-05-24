@@ -92,6 +92,17 @@ class Propiedad {
         }
     }
 
+    // Eliminar un registro
+    public function eliminar() {
+        $query = "DELETE FROM propiedades WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
+        $resultado = self::$db->query($query);
+
+        if($resultado) {
+            $this->borrarImagen();
+            header('Location: /BienesRaices/admin?Resultado=3');
+        }
+    }
+
     // Identificar y unir los atributos de la BD
     public function atributos() {
         $atributos = [];
@@ -119,16 +130,23 @@ class Propiedad {
     public function setImagen($imagen) {
         // Elimina la imagen previa
         if(isset($this->id)) {
-            // Comprobar si existe el archivos
-            $existArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
-            if($existArchivo) {
-                unlink(CARPETA_IMAGENES . $this->imagen);
-            }
+            $this->borrarImagen();
         }
 
         // Asignar al atributo de imagen el nombre de la imagen
         if($imagen) {
             $this->imagen = $imagen;
+        }
+    }
+
+    // Elimina el archivo
+    public function borrarImagen() {
+        if(isset($this->id)) {
+            // Comprobar si existe el archivos
+            $existArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
+            if($existArchivo) {
+                unlink(CARPETA_IMAGENES . $this->imagen);
+            }
         }
     }
 
