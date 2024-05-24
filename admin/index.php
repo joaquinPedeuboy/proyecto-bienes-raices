@@ -5,12 +5,14 @@
     estadoAutenticado();
 
     use App\Propiedad;
+    use App\Vendedor;
 
     //Incluye un template
     incluirTemplate('header');
 
     // Implementar un metodo para obtener todas las propiedades
     $propiedades = Propiedad::all();
+    $vendedores = Vendedor::all();
 
 
     //Muestra mensaje condicional
