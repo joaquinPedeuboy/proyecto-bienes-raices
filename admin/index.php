@@ -23,9 +23,21 @@
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
         if($id) {
-            $propiedad = Propiedad::find($id);
 
-            $propiedad->eliminar();
+            $tipo = $_POST['tipo'];
+
+            if(validarTipoContenido($tipo)) {
+                // Compara lo que vamos a eliminar
+
+                if($tipo === 'vendedor') {
+                    $vendedor = Vendedor::find($id);
+                    $vendedor->eliminar();
+
+                }else if($tipo === 'propiedad') {
+                    $propiedad = Propiedad::find($id);
+                    $propiedad->eliminar();
+                }
+            }
         }
     }
 
@@ -43,6 +55,8 @@
         <?php endif; ?>
 
         <a href="/BienesRaices/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
+        <a href="/BienesRaices/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo Vendedor</a>
+
 
         <h2>Propiedades</h2>
 
@@ -66,6 +80,7 @@
                     <td>
                         <form method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?php echo $propiedad->id; ?>">
+                            <input type="hidden" name="tipo" value="propiedad">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
                         
@@ -96,6 +111,7 @@
                     <td>
                         <form method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?php echo $vendedor->id; ?>">
+                            <input type="hidden" name="tipo" value="vendedor">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
                         
