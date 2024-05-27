@@ -4,11 +4,9 @@
     
     estadoAutenticado();
 
+    // Importar clases
     use App\Propiedad;
     use App\Vendedor;
-
-    //Incluye un template
-    incluirTemplate('header');
 
     // Implementar un metodo para obtener todas las propiedades
     $propiedades = Propiedad::all();
@@ -19,6 +17,7 @@
     $resultado = $_GET['Resultado'] ?? null;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Validar ID
         $id = $_POST['id'];
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
@@ -41,21 +40,24 @@
         }
     }
 
+//Incluye un template
+incluirTemplate('header');
+
 ?>
 
 
     <main class="contenedor seccion">
         <h1>Administrador de Bienes Raices</h1>
-        <?php if( intval($resultado) === 1) : ?>
-            <p class="alerta exito">Anuncio Creado correctamente</p>
-        <?php elseif( intval( $resultado )=== 2): ?>
-            <p class="alerta exito">Anuncio Actualizado correctamente</p>
-        <?php elseif( intval( $resultado )=== 3): ?>
-            <p class="alerta exito">Anuncio Eliminado correctamente</p>
-        <?php endif; ?>
+        
+        <?php
+            $mensaje = mostrarNotificacion( intval($resultado) );
+            if($mensaje) { ?>
+            <p class="alerta exito"><?php echo s($mensaje) ?> </p>
+
+        <?php } ?>
 
         <a href="/BienesRaices/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
-        <a href="/BienesRaices/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo Vendedor</a>
+        <a href="/BienesRaices/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo Vendedor/a</a>
 
 
         <h2>Propiedades</h2>

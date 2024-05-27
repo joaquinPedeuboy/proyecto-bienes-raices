@@ -6,13 +6,33 @@ use App\Vendedor;
 
 estadoAutenticado();
 
-$vendedor = new Vendedor;
+// Validar que sea un ID valido
+$id = $_GET['id'];
+$id = filter_var($id, FILTER_VALIDATE_INT);
+
+if(!$id) {
+    header('Location: /BienesRaices/admin');
+}
+
+// Obtener el arreglo del vendedor de la BD
+$vendedor = Vendedor::find($id);
 
 //Arreglo con mensajes de errores
 $errores = Vendedor::getErrores();
 
 //Ejecutar el codigo despues de enviar el formulario
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Asignar los valores
+    $args = $_POST['vendedor'];
+    // Sincronizar objeto en memoria con lo que el usuario escribio
+    $vendedor->sincronizar($args);
+
+    // Validacion
+    $errores = $vendedor->validar();
+
+    if(empty($errores)) {
+        $vendedor->guardar();
+    }
 
 }
 
