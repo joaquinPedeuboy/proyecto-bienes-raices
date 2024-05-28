@@ -65,3 +65,11 @@ function mostrarNotificacion($codigo) {
 
     return $mensaje;
 }
+
+// Mostar la cantidad de caracteres deseados
+function cortarTexto($texto, $limite) {
+    if (strlen($texto) > $limite) {
+        $texto = substr($texto, 0, $limite) . '...';
+    }
+    return $texto;
+}
